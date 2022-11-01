@@ -14,7 +14,9 @@ namespace Kogane.Internal
 
         private static void OnGUI( int instanceID, Rect selectionRect )
         {
-            if ( !ProjectBrowserExtensionLabelSetting.instance.IsEnable ) return;
+            var setting = ProjectBrowserExtensionLabelSetting.instance;
+
+            if ( !setting.IsEnable ) return;
 
             // サブアセットに拡張子を表示しようとすると表示が崩れるため
             // サブアセットには拡張子を表示しません
@@ -45,6 +47,10 @@ namespace Kogane.Internal
             {
                 position.x += size.x + 18;
             }
+
+            var offset = setting.Offset;
+            position.x += offset.x;
+            position.y += offset.y;
 
             EditorGUI.LabelField( position, extension );
         }
